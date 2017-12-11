@@ -52,4 +52,26 @@ public class Enemy extends LivingThing {
         }
 
     }
+    @Override
+    public void attack(LivingThing opponent) {
+        int damage = (int) (Math.random() * getAttack());
+        int critical = (int)(Math.random() * 100);
+        if (isDead() == false) {
+            if (critical < 30) {
+                if (damage == 0) {
+                    System.out.printf("%sの攻撃！痛恨の一撃！！,,,だが、%sは攻撃を回避した！\n", getName(), opponent.getName(), damage * 2);
+                } else {
+                    System.out.printf("%sの攻撃！痛恨の一撃！！%sに%dのダメージを与えた！！\n", getName(), opponent.getName(), damage * 2);
+                    opponent.wounded(damage);
+                }
+            }else{
+                if (damage == 0) {
+                    System.out.printf("%sの攻撃！,,,だが、%sは攻撃を回避した！\n", getName(), opponent.getName(), damage);
+                } else {
+                    System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", getName(), opponent.getName(), damage);
+                    opponent.wounded((damage));
+                }
+            }
+        }
+    }
 }
